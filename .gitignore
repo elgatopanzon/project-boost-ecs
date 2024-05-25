@@ -494,4 +494,7 @@ $RECYCLE.BIN/
 /tests/libs/godotegp-framework-csharp
 /tests/libs/godotegp-framework-nongame
 # Managed by git-multi (sub repo git@github.com:elgatopanzon/godotegp-framework.git) (commit HEAD) 
-/./src/addons/godotegp-framework-csharp 
+/src/addons/godotegp-framework-csharp 
+
+# Godot 4
+/**/.godot

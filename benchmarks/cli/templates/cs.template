@@ -1,0 +1,21 @@
+/**
+ * @author      : {{NAME}} ({{EMAIL}}) {{COPYRIGHT}}
+ * @file        : {{FILE}}
+ * @created     : {{TIMESTAMP}}
+ */
+
+namespace EGP.ProjectBoost.Benchmarks.{{FILEP}};
+
+using System;
+using Xunit;
+using BenchmarkDotNet.Attributes;
+using BenchmarkDotNet.Running;
+
+public partial class {{CAMEL_CLASS}} : BenchmarkContext
+{
+	[Fact]
+	public void {{CAMEL_CLASS}}_test()
+	{
+		{{CURSOR}}
+	}
+}

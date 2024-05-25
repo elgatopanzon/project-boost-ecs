@@ -1,0 +1,10 @@
+{
+  "Resources": {
+    "Examples": {
+      "example": {
+        "Path": "res://example.resource",
+        "Class": "Godot.Resource"
+      }
+    }
+  }
+}

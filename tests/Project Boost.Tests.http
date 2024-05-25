@@ -1,0 +1,6 @@
+@Project_Boost.Tests_HostAddress = http://localhost:5117
+
+GET {{Project_Boost.Tests_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

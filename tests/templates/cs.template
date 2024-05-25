@@ -1,0 +1,19 @@
+/**
+ * @author      : {{NAME}} ({{EMAIL}}) {{COPYRIGHT}}
+ * @file        : {{FILE}}
+ * @created     : {{TIMESTAMP}}
+ */
+
+namespace EGP.ProjectBoost.Tests.{{FILEP}};
+
+using System;
+using Xunit;
+
+public partial class {{CAMEL_CLASS}} : TestContext
+{
+	[Fact]
+	public void {{CAMEL_CLASS}}_test()
+	{
+		{{CURSOR}}
+	}
+}

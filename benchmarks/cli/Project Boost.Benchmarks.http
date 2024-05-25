@@ -1,0 +1,6 @@
+@Project_Boost.Benchmarks_HostAddress = http://localhost:5241
+
+GET {{Project_Boost.Benchmarks_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

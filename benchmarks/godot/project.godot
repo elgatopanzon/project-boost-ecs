@@ -1,0 +1,44 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Project Boost"
+config/features=PackedStringArray("4.2", "C#", "GL Compatibility")
+config/icon="res://icon.svg"
+run/main_loop_type="GodotEGPMainLoop"
+
+[display]
+
+window/size/viewport_width=2400
+window/size/viewport_height=1200
+window/stretch/mode="viewport"
+window/stretch/aspect="keep_width"
+window/stretch/scale=2.0
+
+[dotnet]
+
+project/assembly_name="Project Boost"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godotegp-framework-csharp/plugin.cfg")
+
+[network]
+
+limits/packet_peer_stream/max_buffer_po2=32
+limits/debugger/max_chars_per_second=3276800
+limits/debugger/max_queued_messages=200048
+limits/webrtc/max_channel_in_buffer_kb=128
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
