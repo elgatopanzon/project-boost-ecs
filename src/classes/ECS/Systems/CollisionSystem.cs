@@ -32,7 +32,7 @@ public struct CollisionSystem : ISystem
 		ref GameStateComponent gameState = ref core.Get<GameStateComponent>(Entity.CreateFrom(GameStateComponent.Id));
 
 		// get the Node3D object and process position
-		Player player = playerNode.Player;
+		Player player = core.GetObject<Player>(playerNode.PlayerNodeEntity);
 
 		// process any collided objects
 		bool destroyPlayer = false;
@@ -62,7 +62,6 @@ public struct CollisionSystem : ISystem
 		// the scene
 		if (destroyPlayer)
 		{
-			playerNode.Player = null; // remove reference to player
 			core.Destroy(entity);
 		}
 	}

@@ -18,11 +18,10 @@ using GodotEGP.Collections;
 
 using GodotEGP.ECSv4;
 using GodotEGP.ECSv4.Components;
-using EGP.ProjectBoost.Scenes;
 
 public struct PlayerNodeComponent : IComponentData
 {
 	public static int Id { get; set; }
 
-	public Player Player { get; set; }
+	public Entity PlayerNodeEntity { get; set; }
 }

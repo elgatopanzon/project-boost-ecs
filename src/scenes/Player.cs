@@ -33,6 +33,7 @@ public partial class Player : RigidBody3D
 	public float RotationPower { get; set; } = 100f;
 
 	private EntityHandle e;
+	private Entity _nodeEntity;
 
 	public Queue<Node> Collisions { get; set; }
 
@@ -51,16 +52,21 @@ public partial class Player : RigidBody3D
 		// create an entity for this player
 		e = _ecs.Create();
 
+		_nodeEntity = _ecs.RegisterObject(this);
+
 		// add the player movement component
 		e.Set<PlayerNodeComponent>(new() {
-			Player = this,
+			PlayerNodeEntity = _nodeEntity,
 			});
 
+		LoggerManager.LogWarning("Player nodeId", "", "nodeEntity", _nodeEntity);
 		LoggerManager.LogWarning("Player enter tree!");
 	}
 
 	public override void _ExitTree()
 	{
+		_ecs.DestroyObject(_nodeEntity);
+
 		LoggerManager.LogWarning("Player leave tree!");
 	}
 

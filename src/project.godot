@@ -55,6 +55,12 @@ rotate_right={
 ]
 }
 
+[network]
+
+limits/debugger/max_chars_per_second=327680
+limits/debugger/max_queued_messages=20480
+limits/webrtc/max_channel_in_buffer_kb=128
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

@@ -31,7 +31,7 @@ public struct PlayerMovementSystem : ISystem
 		ref PlayerNodeComponent playerNode = ref query.Results.GetComponent<PlayerNodeComponent>(entity);
 
 		// get the Node3D object and process position
-		Player player = playerNode.Player;
+		Player player = core.GetObject<Player>(playerNode.PlayerNodeEntity);
 
 		// thrust
 		if (inputState.ThrustPressed)
