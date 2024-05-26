@@ -47,6 +47,12 @@ public struct CollisionSystem : ISystem
 				gameState.Goal = true;
 				destroyPlayer = true;
 
+				// check if it's a LandingPad
+				if (node is LandingPad lp)
+				{
+					gameState.NextLevelSceneId = lp.NextLevelId;
+				}
+
 				LoggerManager.LogDebug("Setting goal game state");
 			}
 			else if (node.IsInGroup("Hazard"))

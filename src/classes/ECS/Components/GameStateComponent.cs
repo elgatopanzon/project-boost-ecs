@@ -27,4 +27,5 @@ public struct GameStateComponent : IComponentData
 	public bool Crashed { get; set; }
 	public bool Finished { get; set; }
 	public bool Restart { get; set; }
+	public string NextLevelSceneId { get; set; }
 }

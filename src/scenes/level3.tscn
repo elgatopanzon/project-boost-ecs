@@ -1,7 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://daae6cq6p5gjw"]
+[gd_scene load_steps=10 format=3 uid="uid://dy55kbm2fs6ph"]
 
-[ext_resource type="PackedScene" uid="uid://eekyl7w4x8i7" path="res://scenes/player.tscn" id="1_t2wb3"]
-[ext_resource type="Script" path="res://scenes/LandingPad.cs" id="1_wwy3f"]
+[ext_resource type="Script" path="res://scenes/LandingPad.cs" id="1_tfrvu"]
+[ext_resource type="PackedScene" uid="uid://eekyl7w4x8i7" path="res://scenes/player.tscn" id="2_n0mr8"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_p1gdv"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -23,6 +23,9 @@ albedo_color = Color(0.368627, 0.584314, 0.796078, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a6pb1"]
 albedo_color = Color(0.266667, 0.811765, 0.392157, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_otetp"]
+albedo_color = Color(0.890196, 0.454902, 0.772549, 1)
 
 [node name="Level" type="Node3D"]
 
@@ -50,11 +53,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0.25, 0.129)
 use_collision = true
 size = Vector3(2, 0.5, 2)
 material = SubResource("StandardMaterial3D_a6pb1")
-script = ExtResource("1_wwy3f")
-NextLevelId = "level2"
+script = ExtResource("1_tfrvu")
+NextLevelId = "level"
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.970296, 0.241922, 0, -0.241922, 0.970296, 0, 4.605, 7.374)
 
-[node name="Player" parent="." instance=ExtResource("1_t2wb3")]
+[node name="Player" parent="." instance=ExtResource("2_n0mr8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 1.514, 0.129)
+
+[node name="Hazard" type="CSGBox3D" parent="." groups=["Hazard"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.51667, 0)
+use_collision = true
+size = Vector3(14, 2.5, 2.5)
+material = SubResource("StandardMaterial3D_otetp")

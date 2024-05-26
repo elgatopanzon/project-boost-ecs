@@ -38,13 +38,29 @@ public struct GameSystem : ISystem
 			gameState.Crashed = false;
 			gameState.Restart = true;
 		}
+		if (gameState.Goal)
+		{
+			LoggerManager.LogDebug("Goal!");
+
+			gameState.Goal = false;
+			gameState.Finished = true;
+		}
+
 		if (gameState.Restart)
 		{
 			LoggerManager.LogDebug("Restarting");
 			gameState.Restart = false;
 
 			// reload the scene
-			ServiceRegistry.Get<SceneManager>().GetTree().ReloadCurrentScene();
+			ServiceRegistry.Get<SceneManager>().ReloadCurrentScene();
+		}
+		if (gameState.Finished)
+		{
+			LoggerManager.LogDebug("Finished");
+			gameState.Finished = false;
+
+			// load the next level
+			ServiceRegistry.Get<SceneManager>().LoadScene(gameState.NextLevelSceneId);
 		}
 	}
 }

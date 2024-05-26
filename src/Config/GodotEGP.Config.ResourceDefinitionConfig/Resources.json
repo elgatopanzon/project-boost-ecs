@@ -1,9 +1,17 @@
 {
   "Resources": {
-    "Examples": {
-      "example": {
-        "Path": "res://example.resource",
-        "Class": "Godot.Resource"
+    "Levels": {
+      "level": {
+        "Path": "res://scenes/level.tscn",
+        "Class": "Godot.PackedScene"
+      },
+      "level2": {
+        "Path": "res://scenes/level2.tscn",
+        "Class": "Godot.PackedScene"
+      },
+      "level3": {
+        "Path": "res://scenes/level3.tscn",
+        "Class": "Godot.PackedScene"
       }
     }
   }
