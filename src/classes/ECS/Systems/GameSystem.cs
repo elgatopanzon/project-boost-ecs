@@ -48,20 +48,49 @@ public struct GameSystem : ISystem
 
 		if (gameState.Restart)
 		{
-			LoggerManager.LogDebug("Restarting");
 			gameState.Restart = false;
 
 			// reload the scene
-			ServiceRegistry.Get<SceneManager>().ReloadCurrentScene();
+			var tween = ServiceRegistry.Instance.CreateTween();
+			tween.TweenInterval(1.0);
+
+			// set the tween callback to reload the scene
+			tween.TweenCallback(Callable.From(CreateRestartTransition()));
 		}
 		if (gameState.Finished)
 		{
-			LoggerManager.LogDebug("Finished");
 			gameState.Finished = false;
 
 			// load the next level
-			ServiceRegistry.Get<SceneManager>().LoadScene(gameState.NextLevelSceneId);
+			// create a tween to wait
+			var tween = ServiceRegistry.Instance.CreateTween();
+			tween.TweenInterval(1.0);
+
+			string nextLevelId = gameState.NextLevelSceneId;
+
+			// set the tween callback to load the new scene
+			tween.TweenCallback(Callable.From(CreateLevelTransition(nextLevelId)));
 		}
+	}
+
+	public Action CreateRestartTransition()
+	{
+		Action transition = () => {
+			LoggerManager.LogDebug("Restarting");
+			ServiceRegistry.Get<SceneManager>().ReloadCurrentScene();
+		};
+
+		return transition;
+	}
+
+	public Action CreateLevelTransition(string levelId)
+	{
+		Action transition = () => {
+			LoggerManager.LogDebug("Finished");
+			ServiceRegistry.Get<SceneManager>().LoadScene(levelId);
+		};
+
+		return transition;
 	}
 }
 

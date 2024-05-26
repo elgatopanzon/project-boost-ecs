@@ -68,6 +68,7 @@ public struct CollisionSystem : ISystem
 		// the scene
 		if (destroyPlayer)
 		{
+			player.SetProcess(false); // disable processing of the player
 			core.Destroy(entity);
 		}
 	}
