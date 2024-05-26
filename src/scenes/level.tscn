@@ -1,0 +1,57 @@
+[gd_scene load_steps=8 format=3 uid="uid://daae6cq6p5gjw"]
+
+[ext_resource type="PackedScene" uid="uid://eekyl7w4x8i7" path="res://scenes/player.tscn" id="1_t2wb3"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_p1gdv"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_yrpp1"]
+sky_material = SubResource("ProceduralSkyMaterial_p1gdv")
+
+[sub_resource type="Environment" id="Environment_eibhs"]
+background_mode = 2
+sky = SubResource("Sky_yrpp1")
+tonemap_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wbyw6"]
+albedo_color = Color(0.592157, 0.341176, 0.168627, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bgty5"]
+albedo_color = Color(0.368627, 0.584314, 0.796078, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a6pb1"]
+albedo_color = Color(0.266667, 0.811765, 0.392157, 1)
+
+[node name="Level" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_eibhs")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Floor" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
+use_collision = true
+size = Vector3(30, 8, 5)
+material = SubResource("StandardMaterial3D_wbyw6")
+
+[node name="LaunchPad" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 0.25, 0.129)
+use_collision = true
+size = Vector3(2, 0.5, 2)
+material = SubResource("StandardMaterial3D_bgty5")
+
+[node name="LandingPad" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0.25, 0.129)
+use_collision = true
+size = Vector3(2, 0.5, 2)
+material = SubResource("StandardMaterial3D_a6pb1")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.970296, 0.241922, 0, -0.241922, 0.970296, 0, 4.605, 7.374)
+
+[node name="Player" parent="." instance=ExtResource("1_t2wb3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 1.514, 0.129)

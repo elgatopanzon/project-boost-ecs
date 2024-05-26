@@ -21,11 +21,8 @@ settings/stdout/print_fps=true
 
 [display]
 
-window/size/viewport_width=2400
-window/size/viewport_height=1200
 window/stretch/mode="viewport"
 window/stretch/aspect="keep_width"
-window/stretch/scale=2.0
 window/vsync/vsync_mode=0
 
 [dotnet]
