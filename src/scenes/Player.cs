@@ -19,6 +19,7 @@ using GodotEGP.Collections;
 
 using GodotEGP.ECSv4;
 using EGP.ProjectBoost.ECS.Components;
+using System.Linq;
 
 public partial class Player : RigidBody3D
 {
@@ -27,6 +28,8 @@ public partial class Player : RigidBody3D
 	public Player()
 	{
 		_ecs = ServiceRegistry.Get<ECS>();
+
+		this.SubscribeSignal(SignalName.BodyEntered, true, _On_BodyEntered, isHighPriority:true);
 	}
 
 	public override void _Ready()
@@ -40,5 +43,20 @@ public partial class Player : RigidBody3D
 			});
 
 		LoggerManager.LogWarning("Player ready!");
+	}
+
+	public void _On_BodyEntered(GodotSignal e)
+	{
+		e.TryGetParam<Node3D>(0, out Node3D node);
+		LoggerManager.LogDebug("Body entered", "", "name", node.Name.ToString());
+
+		if (node.IsInGroup("Goal"))
+		{
+			LoggerManager.LogDebug("Win!");
+		}
+		else if (node.IsInGroup("Hazard"))
+		{
+			LoggerManager.LogDebug("Ouch!");
+		}
 	}
 }
