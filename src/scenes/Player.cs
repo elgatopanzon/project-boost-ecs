@@ -4,7 +4,7 @@
  * @created     : Friday May 24, 2024 23:00:52 CST
  */
 
-namespace EGP.ProjectBoost.scenes;
+namespace EGP.ProjectBoost.Scenes;
 
 using System;
 
@@ -25,9 +25,17 @@ public partial class Player : RigidBody3D
 {
 	private ECS _ecs;
 
+	public Vector3 Torque { get; set; }
+
+	[Export]
+	public float ThrustPower { get; set; } = 1000f;
+	[Export]
+	public float RotationPower { get; set; } = 100f;
+
 	public Player()
 	{
 		_ecs = ServiceRegistry.Get<ECS>();
+		Torque = new Vector3(0f, 0f, RotationPower);
 
 		this.SubscribeSignal(SignalName.BodyEntered, true, _On_BodyEntered, isHighPriority:true);
 	}

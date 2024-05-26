@@ -21,40 +21,32 @@ using GodotEGP.ECSv4.Components;
 using GodotEGP.ECSv4.Systems;
 using GodotEGP.ECSv4.Queries;
 using EGP.ProjectBoost.ECS.Components;
+using EGP.ProjectBoost.Scenes;
 
 public struct PlayerMovementSystem : ISystem
 {
-	private float _thrustPower = 1000f;
-	private float _rotationPower = 100f;
-	private Vector3 _torque;
-
-	public PlayerMovementSystem()
-	{
-		_torque = new Vector3(0f, 0f, _rotationPower);
-	}
-
 	public void Update(Entity entity, int index, SystemInstance system, double deltaTime, ECS core, Query query)
 	{
 		ref InputStateComponent inputState = ref core.Get<InputStateComponent>(Entity.CreateFrom(InputStateComponent.Id));
 		ref PlayerNodeComponent playerNode = ref query.Results.GetComponent<PlayerNodeComponent>(entity);
 
 		// get the Node3D object and process position
-		RigidBody3D player = core.GetObject<RigidBody3D>(playerNode.PlayerNodeEntity);
+		Player player = core.GetObject<Player>(playerNode.PlayerNodeEntity);
 
 		// thrust
 		if (inputState.ThrustPressed)
 		{
-			player.ApplyCentralForce(player.Basis.Y * (float) deltaTime * _thrustPower);
+			player.ApplyCentralForce(player.Basis.Y * (float) deltaTime * player.ThrustPower);
 		}
 
 		// left and right rotation
 		if (inputState.LeftPressed)
 		{
-			player.ApplyTorque((_torque * (float) deltaTime));
+			player.ApplyTorque((player.Torque * (float) deltaTime));
 		}
 		else if (inputState.RightPressed)
 		{
-			player.ApplyTorque(-(_torque * (float) deltaTime));
+			player.ApplyTorque(-(player.Torque * (float) deltaTime));
 		}
 	}
 }
