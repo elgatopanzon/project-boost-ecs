@@ -19,7 +19,7 @@ using GodotEGP.Collections;
 
 using GodotEGP.ECSv4;
 using EGP.ProjectBoost.ECS.Components;
-using System.Linq;
+using System.Collections.Generic;
 
 public partial class Player : RigidBody3D
 {
@@ -32,39 +32,47 @@ public partial class Player : RigidBody3D
 	[Export]
 	public float RotationPower { get; set; } = 100f;
 
+	private EntityHandle e;
+
+	public Queue<Node> Collisions { get; set; }
+
 	public Player()
 	{
 		_ecs = ServiceRegistry.Get<ECS>();
 		Torque = new Vector3(0f, 0f, RotationPower);
 
+		Collisions = new();
+
 		this.SubscribeSignal(SignalName.BodyEntered, true, _On_BodyEntered, isHighPriority:true);
+	}
+
+	public override void _EnterTree()
+	{
+		// create an entity for this player
+		e = _ecs.Create();
+
+		// add the player movement component
+		e.Set<PlayerNodeComponent>(new() {
+			Player = this,
+			});
+
+		LoggerManager.LogWarning("Player enter tree!");
+	}
+
+	public override void _ExitTree()
+	{
+		LoggerManager.LogWarning("Player leave tree!");
 	}
 
 	public override void _Ready()
 	{
-		// create an entity for this player
-		EntityHandle e = _ecs.Create();
-
-		// add the player movement component
-		e.Set<PlayerNodeComponent>(new() {
-			PlayerNodeEntity = _ecs.RegisterObject(this),
-			});
-
 		LoggerManager.LogWarning("Player ready!");
 	}
 
 	public void _On_BodyEntered(GodotSignal e)
 	{
 		e.TryGetParam<Node3D>(0, out Node3D node);
-		LoggerManager.LogDebug("Body entered", "", "name", node.Name.ToString());
 
-		if (node.IsInGroup("Goal"))
-		{
-			LoggerManager.LogDebug("Win!");
-		}
-		else if (node.IsInGroup("Hazard"))
-		{
-			LoggerManager.LogDebug("Ouch!");
-		}
+		Collisions.Enqueue(node);
 	}
 }

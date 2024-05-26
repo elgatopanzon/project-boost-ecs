@@ -1,7 +1,7 @@
 /**
  * @author      : ElGatoPanzon (contact@elgatopanzon.io) Copyright (c) ElGatoPanzon
- * @file        : PlayerNodeComponent
- * @created     : Saturday May 25, 2024 15:35:03 CST
+ * @file        : GameStateComponent
+ * @created     : Sunday May 26, 2024 00:14:45 CST
  */
 
 namespace EGP.ProjectBoost.ECS.Components;
@@ -18,11 +18,13 @@ using GodotEGP.Collections;
 
 using GodotEGP.ECSv4;
 using GodotEGP.ECSv4.Components;
-using EGP.ProjectBoost.Scenes;
 
-public struct PlayerNodeComponent : IComponentData
+public struct GameStateComponent : IComponentData
 {
 	public static int Id { get; set; }
 
-	public Player Player { get; set; }
+	public bool Goal { get; set; }
+	public bool Crashed { get; set; }
+	public bool Finished { get; set; }
+	public bool Restart { get; set; }
 }

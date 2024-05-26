@@ -38,7 +38,7 @@ use_collision = true
 size = Vector3(30, 8, 5)
 material = SubResource("StandardMaterial3D_wbyw6")
 
-[node name="LaunchPad" type="CSGBox3D" parent="." groups=["Hazard"]]
+[node name="LaunchPad" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 0.25, 0.129)
 use_collision = true
 size = Vector3(2, 0.5, 2)

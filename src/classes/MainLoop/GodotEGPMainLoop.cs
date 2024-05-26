@@ -31,18 +31,30 @@ public partial class GodotEGPMainLoop : SceneTree
 		// register components and systems
 		_ecs.RegisterComponent<PlayerNodeComponent>();
 		_ecs.RegisterComponent<InputStateComponent>();
+		_ecs.RegisterComponent<GameStateComponent>();
 
-		_ecs.RegisterSystem<InputStateSystem, OnUpdatePhase>(_ecs.CreateQuery()
+		_ecs.RegisterSystem<InputStateSystem, OnStartupPhase>(_ecs.CreateQuery()
 				.Has<InputStateComponent>()
 				.Build()
 			);
-		_ecs.RegisterSystem<PlayerMovementSystem, FinalPhase>(_ecs.CreateQuery()
+		_ecs.RegisterSystem<PlayerMovementSystem, OnUpdatePhase>(_ecs.CreateQuery()
 				.Has<PlayerNodeComponent>()
+				.Build()
+			);
+		_ecs.RegisterSystem<CollisionSystem, PreUpdatePhase>(_ecs.CreateQuery()
+				.Has<PlayerNodeComponent>()
+				.Build()
+			);
+		_ecs.RegisterSystem<GameSystem, FinalPhase>(_ecs.CreateQuery()
+				.Has<GameStateComponent>()
 				.Build()
 			);
 
 		// add input state component as singleton component
 		_ecs.Set<InputStateComponent>(Entity.CreateFrom(InputStateComponent.Id), new());
+
+		// add game state component as singleton component
+		_ecs.Set<GameStateComponent>(Entity.CreateFrom(GameStateComponent.Id), new());
 	}
 
 	partial void _On_Ready()
