@@ -30,8 +30,8 @@ public struct InputStateSystem : ISystem
 		ref InputStateComponent inputState = ref core.Get<InputStateComponent>(Entity.CreateFrom(InputStateComponent.Id));
 
 		// update state
-		inputState.ThrustPressed = Input.IsActionPressed("ui_accept");
-		inputState.LeftPressed = Input.IsActionPressed("ui_left");
-		inputState.RightPressed = Input.IsActionPressed("ui_right");
+		inputState.ThrustPressed = Input.IsActionPressed("boost");
+		inputState.LeftPressed = Input.IsActionPressed("rotate_left");
+		inputState.RightPressed = Input.IsActionPressed("rotate_right");
 	}
 }

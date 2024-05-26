@@ -20,7 +20,7 @@ using GodotEGP.Collections;
 using GodotEGP.ECSv4;
 using EGP.ProjectBoost.ECS.Components;
 
-public partial class Player : Node3D
+public partial class Player : RigidBody3D
 {
 	private ECS _ecs;
 

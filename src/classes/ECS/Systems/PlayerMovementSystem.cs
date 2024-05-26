@@ -24,31 +24,37 @@ using EGP.ProjectBoost.ECS.Components;
 
 public struct PlayerMovementSystem : ISystem
 {
+	private float _thrustPower = 1000f;
+	private float _rotationPower = 100f;
+	private Vector3 _torque;
+
+	public PlayerMovementSystem()
+	{
+		_torque = new Vector3(0f, 0f, _rotationPower);
+	}
+
 	public void Update(Entity entity, int index, SystemInstance system, double deltaTime, ECS core, Query query)
 	{
 		ref InputStateComponent inputState = ref core.Get<InputStateComponent>(Entity.CreateFrom(InputStateComponent.Id));
 		ref PlayerNodeComponent playerNode = ref query.Results.GetComponent<PlayerNodeComponent>(entity);
 
 		// get the Node3D object and process position
-		Node3D node = core.GetObject<Node3D>(playerNode.PlayerNodeEntity);
+		RigidBody3D player = core.GetObject<RigidBody3D>(playerNode.PlayerNodeEntity);
 
 		// thrust
 		if (inputState.ThrustPressed)
 		{
-			Vector3 pos = node.Position;
-			node.Position = pos with {
-				Y = pos.Y + (float) deltaTime,
-			};
+			player.ApplyCentralForce(player.Basis.Y * (float) deltaTime * _thrustPower);
 		}
 
 		// left and right rotation
 		if (inputState.LeftPressed)
 		{
-			node.RotateZ((float) deltaTime);
+			player.ApplyTorque((_torque * (float) deltaTime));
 		}
 		else if (inputState.RightPressed)
 		{
-			node.RotateZ((float) -deltaTime);
+			player.ApplyTorque(-(_torque * (float) deltaTime));
 		}
 	}
 }
