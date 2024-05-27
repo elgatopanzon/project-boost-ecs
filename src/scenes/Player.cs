@@ -60,6 +60,8 @@ public partial class Player : RigidBody3D
 		e.Set<PlayerNodeComponent>(new() {
 			PlayerNodeEntity = _nodeEntity,
 			});
+		// add player state component
+		e.Set<PlayerStateComponent>(new());
 
 		LoggerManager.LogWarning("Player nodeId", "", "nodeEntity", _nodeEntity);
 		LoggerManager.LogWarning("Player enter tree!");

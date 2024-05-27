@@ -27,13 +27,17 @@ public struct PlayerAudioSystem : ISystem
 {
 	public void Update(Entity entity, int index, SystemInstance system, double deltaTime, ECS core, Query query)
 	{
-		ref InputStateComponent inputState = ref core.Get<InputStateComponent>(Entity.CreateFrom(InputStateComponent.Id));
+		ref PlayerStateComponent playerState = ref query.Results.GetComponent<PlayerStateComponent>(entity);
 		ref PlayerNodeComponent playerNode = ref query.Results.GetComponent<PlayerNodeComponent>(entity);
 
 		Player player = core.GetObject<Player>(playerNode.PlayerNodeEntity);
 
 		// thrust triggers sfx
-		if (inputState.ThrustPressed)
+		if (
+				(playerState.MainThrusterState == PlayerStateComponent.ThrusterState.On)
+				|| (playerState.LeftThrusterState == PlayerStateComponent.ThrusterState.On)
+				|| (playerState.RightThrusterState == PlayerStateComponent.ThrusterState.On)
+				)
 		{
 			if (!player.RocketAudio.Playing)
 			{

@@ -27,26 +27,29 @@ public struct PlayerMovementSystem : ISystem
 {
 	public void Update(Entity entity, int index, SystemInstance system, double deltaTime, ECS core, Query query)
 	{
-		ref InputStateComponent inputState = ref core.Get<InputStateComponent>(Entity.CreateFrom(InputStateComponent.Id));
+		ref PlayerStateComponent playerState = ref query.Results.GetComponent<PlayerStateComponent>(entity);
 		ref PlayerNodeComponent playerNode = ref query.Results.GetComponent<PlayerNodeComponent>(entity);
 
 		// get the Node3D object and process position
 		Player player = core.GetObject<Player>(playerNode.PlayerNodeEntity);
 
-		// thrust
-		if (inputState.ThrustPressed)
+		// main thruster
+		if (playerState.MainThrusterState == PlayerStateComponent.ThrusterState.On)
 		{
 			player.ApplyCentralForce(player.Basis.Y * (float) deltaTime * player.ThrustPower);
 		}
 
-		// left and right rotation
-		if (inputState.LeftPressed)
+		// left and right thrusters
+		Vector3 torque = Vector3.Zero;
+		if (playerState.RightThrusterState == PlayerStateComponent.ThrusterState.On)
 		{
-			player.ApplyTorque((player.Torque * (float) deltaTime));
+			torque += player.Torque;
 		}
-		else if (inputState.RightPressed)
+		if (playerState.LeftThrusterState == PlayerStateComponent.ThrusterState.On)
 		{
-			player.ApplyTorque(-(player.Torque * (float) deltaTime));
+			torque += -player.Torque;
 		}
+
+		player.ApplyTorque(torque * (float) deltaTime);
 	}
 }
