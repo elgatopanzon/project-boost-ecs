@@ -22,7 +22,7 @@ using GodotEGP.ECSv4.Systems;
 using GodotEGP.ECSv4.Queries;
 using EGP.ProjectBoost.ECS.Components;
 
-public struct InputStateSystem : ISystem
+public class InputStateSystem : ISystem
 {
 	public void Update(Entity entity, int index, SystemInstance system, double deltaTime, ECS core, Query query)
 	{

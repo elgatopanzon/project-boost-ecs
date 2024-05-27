@@ -23,7 +23,7 @@ using GodotEGP.ECSv4.Queries;
 using EGP.ProjectBoost.ECS.Components;
 using EGP.ProjectBoost.Scenes;
 
-public struct PlayerMovementSystem : ISystem
+public class PlayerMovementSystem : ISystem
 {
 	public void Update(Entity entity, int index, SystemInstance system, double deltaTime, ECS core, Query query)
 	{

@@ -25,7 +25,7 @@ using EGP.ProjectBoost.ECS.Components;
 using EGP.ProjectBoost.Scenes;
 using EGP.ProjectBoost.Events;
 
-public struct GameSystem : ISystem
+public class GameSystem : ISystem
 {
 	public void Update(Entity entity, int index, SystemInstance system, double deltaTime, ECS core, Query query)
 	{
