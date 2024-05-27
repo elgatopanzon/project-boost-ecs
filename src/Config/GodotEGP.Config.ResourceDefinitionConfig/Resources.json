@@ -12,6 +12,10 @@
       "level3": {
         "Path": "res://scenes/level3.tscn",
         "Class": "Godot.PackedScene"
+      },
+      "level4": {
+        "Path": "res://scenes/level4.tscn",
+        "Class": "Godot.PackedScene"
       }
     }
   }
