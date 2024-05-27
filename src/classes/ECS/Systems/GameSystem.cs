@@ -23,6 +23,7 @@ using GodotEGP.ECSv4.Systems;
 using GodotEGP.ECSv4.Queries;
 using EGP.ProjectBoost.ECS.Components;
 using EGP.ProjectBoost.Scenes;
+using EGP.ProjectBoost.Events;
 
 public struct GameSystem : ISystem
 {
@@ -35,12 +36,16 @@ public struct GameSystem : ISystem
 		{
 			LoggerManager.LogDebug("Crashed!");
 
+			this.Emit<GameStateCrashed>();
+
 			gameState.Crashed = false;
 			gameState.Restart = true;
 		}
 		if (gameState.Goal)
 		{
 			LoggerManager.LogDebug("Goal!");
+
+			this.Emit<GameStateGoal>();
 
 			gameState.Goal = false;
 			gameState.Finished = true;

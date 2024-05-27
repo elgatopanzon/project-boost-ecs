@@ -17,6 +17,7 @@ using GodotEGP.Config;
 using GodotEGP.Collections;
 
 using Godot;
+using GodotEGP;
 using GodotEGP.ECSv4;
 using GodotEGP.ECSv4.Components;
 using GodotEGP.ECSv4.Systems;

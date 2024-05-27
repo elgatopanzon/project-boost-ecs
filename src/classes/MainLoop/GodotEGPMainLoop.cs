@@ -8,6 +8,7 @@ namespace GodotEGP.MainLoop;
 
 using Godot;
 using GodotEGP;
+using GodotEGP.Objects.Extensions;
 using GodotEGP.Logging;
 using GodotEGP.Service;
 
@@ -15,6 +16,7 @@ using GodotEGP.ECSv4;
 using GodotEGP.ECSv4.Components;
 using EGP.ProjectBoost.ECS.Components;
 using EGP.ProjectBoost.ECS.Systems;
+using EGP.ProjectBoost.Events;
 
 #if GODOT
 public partial class GodotEGPMainLoop : SceneTree
@@ -61,6 +63,28 @@ public partial class GodotEGPMainLoop : SceneTree
 	{
 		// deregister default inputmanager service
 		ServiceRegistry.Deregister<InputManager>();
+
+		// create audio nodes for SFX
+		var audioResources = ServiceRegistry.Get<ResourceManager>().GetResources<AudioStream>();
+
+		AudioStreamPlayer sfxCrash = new();
+		sfxCrash.SetMeta("id", "sfx_crash");
+		sfxCrash.Stream = audioResources["sfx_crash"].Value;
+
+		AudioStreamPlayer sfxGoal = new();
+		sfxGoal.SetMeta("id", "sfx_goal");
+		sfxGoal.Stream = audioResources["sfx_goal"].Value;
+
+		ServiceRegistry.Instance.GetTree().Root.AddChild(sfxCrash);
+		ServiceRegistry.Instance.GetTree().Root.AddChild(sfxGoal);
+
+		// subscribe to game state events to play audio
+		this.Subscribe<GameStateCrashed>((e) => {
+			ServiceRegistry.Get<NodeManager>().GetNode<AudioStreamPlayer>("sfx_crash").Play();
+		});
+		this.Subscribe<GameStateGoal>((e) => {
+			ServiceRegistry.Get<NodeManager>().GetNode<AudioStreamPlayer>("sfx_goal").Play();
+		});
 	}
 }
 #endif

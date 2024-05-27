@@ -17,6 +17,16 @@
         "Path": "res://scenes/level4.tscn",
         "Class": "Godot.PackedScene"
       }
+    },
+    "Audio": {
+      "sfx_crash": {
+        "Path": "res://assets/SFX - Death Explosion.ogg",
+        "Class": "Godot.AudioStream"
+      },
+      "sfx_goal": {
+        "Path": "res://assets/SFX - Success.ogg",
+        "Class": "Godot.AudioStream"
+      }
     }
   }
 }
