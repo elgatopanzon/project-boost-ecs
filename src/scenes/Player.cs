@@ -38,6 +38,9 @@ public partial class Player : RigidBody3D
 	public Queue<Node> Collisions { get; set; }
 
 	public AudioStreamPlayer3D RocketAudio { get; set; }
+	public GpuParticles3D BoosterParticles { get; set; }
+	public GpuParticles3D LeftBoosterParticles { get; set; }
+	public GpuParticles3D RightBoosterParticles { get; set; }
 
 	public Player()
 	{
@@ -78,6 +81,9 @@ public partial class Player : RigidBody3D
 	{
 		// set rocket audio node
 		RocketAudio = "rocket_audio".Node<AudioStreamPlayer3D>();
+		BoosterParticles = "booster_particles".Node<GpuParticles3D>();
+		LeftBoosterParticles = "booster_particles_left".Node<GpuParticles3D>();
+		RightBoosterParticles = "booster_particles_right".Node<GpuParticles3D>();
 
 		LoggerManager.LogWarning("Player ready!");
 	}
