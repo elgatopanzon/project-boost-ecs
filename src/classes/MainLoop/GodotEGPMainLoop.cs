@@ -43,6 +43,10 @@ public partial class GodotEGPMainLoop : SceneTree
 				.Has<PlayerNodeComponent>()
 				.Build()
 			);
+		_ecs.RegisterSystem<PlayerAudioSystem, OnUpdatePhase>(_ecs.CreateQuery()
+				.Has<PlayerNodeComponent>()
+				.Build()
+			);
 		_ecs.RegisterSystem<CollisionSystem, PreUpdatePhase>(_ecs.CreateQuery()
 				.Has<PlayerNodeComponent>()
 				.Build()

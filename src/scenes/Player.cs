@@ -37,6 +37,8 @@ public partial class Player : RigidBody3D
 
 	public Queue<Node> Collisions { get; set; }
 
+	public AudioStreamPlayer3D RocketAudio { get; set; }
+
 	public Player()
 	{
 		_ecs = ServiceRegistry.Get<ECS>();
@@ -72,6 +74,9 @@ public partial class Player : RigidBody3D
 
 	public override void _Ready()
 	{
+		// set rocket audio node
+		RocketAudio = "rocket_audio".Node<AudioStreamPlayer3D>();
+
 		LoggerManager.LogWarning("Player ready!");
 	}
 

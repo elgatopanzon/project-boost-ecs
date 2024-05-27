@@ -26,6 +26,10 @@
       "sfx_goal": {
         "Path": "res://assets/SFX - Success.ogg",
         "Class": "Godot.AudioStream"
+      },
+      "sfx_thrust": {
+        "Path": "res://assets/SFX - Main engine thrust.ogg",
+        "Class": "Godot.AudioStream"
       }
     }
   }
