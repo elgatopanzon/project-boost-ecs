@@ -30,13 +30,13 @@ public class CollisionSystem : ISystem
 	public void Update(Entity entity, int index, SystemInstance system, double deltaTime, ECS core, Query query)
 	{
 		ref PlayerNodeComponent playerNode = ref query.Results.GetComponent<PlayerNodeComponent>(entity);
+		ref PlayerStateComponent playerState = ref query.Results.GetComponent<PlayerStateComponent>(entity);
 		ref GameStateComponent gameState = ref core.Get<GameStateComponent>(Entity.CreateFrom(GameStateComponent.Id));
 
 		// get the Node3D object and process position
 		Player player = core.GetObject<Player>(playerNode.PlayerNodeEntity);
 
 		// process any collided objects
-		bool destroyPlayer = false;
 		if (player.Collisions.TryPeek(out Node node))
 		{
 			node = player.Collisions.Dequeue();
@@ -46,7 +46,7 @@ public class CollisionSystem : ISystem
 			if (node.IsInGroup("Goal"))
 			{
 				gameState.Goal = true;
-				destroyPlayer = true;
+				playerState.Goal = true;
 
 				// check if it's a LandingPad
 				if (node is LandingPad lp)
@@ -59,18 +59,10 @@ public class CollisionSystem : ISystem
 			else if (node.IsInGroup("Hazard"))
 			{
 				gameState.Crashed = true;
-				destroyPlayer = true;
+				playerState.Crashed = true;
 
 				LoggerManager.LogDebug("Setting crashed game state");
 			}
-		}
-
-		// if we're going to destroy the player, let's do it before reloading
-		// the scene
-		if (destroyPlayer)
-		{
-			player.SetProcess(false); // disable processing of the player
-			core.Destroy(entity);
 		}
 	}
 }

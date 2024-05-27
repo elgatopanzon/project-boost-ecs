@@ -51,5 +51,17 @@ public class PlayerParticlesSystem : ISystem
 		{
 			player.LeftBoosterParticles.Emitting = true;
 		}
+
+		// crash and goal particles
+		if (playerState.Crashed)
+		{
+			LoggerManager.LogDebug("Crash particles");
+			player.CrashParticles.Emitting = true;
+		}
+		if (playerState.Goal)
+		{
+			LoggerManager.LogDebug("Goal particles");
+			player.GoalParticles.Emitting = true;
+		}
 	}
 }

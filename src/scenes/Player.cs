@@ -41,6 +41,8 @@ public partial class Player : RigidBody3D
 	public GpuParticles3D BoosterParticles { get; set; }
 	public GpuParticles3D LeftBoosterParticles { get; set; }
 	public GpuParticles3D RightBoosterParticles { get; set; }
+	public GpuParticles3D CrashParticles { get; set; }
+	public GpuParticles3D GoalParticles { get; set; }
 
 	public Player()
 	{
@@ -84,6 +86,8 @@ public partial class Player : RigidBody3D
 		BoosterParticles = "booster_particles".Node<GpuParticles3D>();
 		LeftBoosterParticles = "booster_particles_left".Node<GpuParticles3D>();
 		RightBoosterParticles = "booster_particles_right".Node<GpuParticles3D>();
+		CrashParticles = "crash_particles".Node<GpuParticles3D>();
+		GoalParticles = "goal_particles".Node<GpuParticles3D>();
 
 		LoggerManager.LogWarning("Player ready!");
 	}

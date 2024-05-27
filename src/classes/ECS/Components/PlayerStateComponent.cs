@@ -33,4 +33,7 @@ public struct PlayerStateComponent : IComponentData
 	public ThrusterState MainThrusterState { get; set; }
 	public ThrusterState LeftThrusterState { get; set; }
 	public ThrusterState RightThrusterState { get; set; }
+
+	public bool Crashed { get; set; }
+	public bool Goal { get; set; }
 }

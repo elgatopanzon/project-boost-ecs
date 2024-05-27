@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://eekyl7w4x8i7"]
+[gd_scene load_steps=8 format=3 uid="uid://eekyl7w4x8i7"]
 
 [ext_resource type="Script" path="res://scenes/Player.cs" id="1_adsv4"]
 [ext_resource type="AudioStream" uid="uid://tv4s6gh5rc8s" path="res://assets/SFX - Main engine thrust.ogg" id="2_6j684"]
 [ext_resource type="PackedScene" uid="uid://gfh732aucr56" path="res://scenes/booster_particles.tscn" id="3_qgqcl"]
+[ext_resource type="PackedScene" path="res://scenes/explosion_particles.tscn" id="4_jhkrg"]
+[ext_resource type="PackedScene" path="res://scenes/success_particles.tscn" id="5_kb5ef"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_3oxkg"]
 
@@ -38,3 +40,9 @@ metadata/id = "booster_particles_left"
 [node name="RightBoosterParticles" parent="." instance=ExtResource("3_qgqcl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.343605, -1.00683, 0)
 metadata/id = "booster_particles_right"
+
+[node name="ExplosionParticles" parent="." instance=ExtResource("4_jhkrg")]
+metadata/id = "crash_particles"
+
+[node name="SuccessParticles" parent="." instance=ExtResource("5_kb5ef")]
+metadata/id = "goal_particles"

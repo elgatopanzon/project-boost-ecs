@@ -40,10 +40,13 @@ public partial class GodotEGPMainLoop : SceneTree
 				.Has<InputStateComponent>()
 				.Build()
 			);
-		_ecs.RegisterSystem<PlayerStateSystem, OnUpdatePhase>(_ecs.CreateQuery()
+
+		_ecs.RegisterSystem<CollisionSystem, PreUpdatePhase>(_ecs.CreateQuery()
 				.Has<PlayerStateComponent>()
+				.Has<PlayerNodeComponent>()
 				.Build()
 			);
+
 		_ecs.RegisterSystem<PlayerMovementSystem, OnUpdatePhase>(_ecs.CreateQuery()
 				.Has<PlayerStateComponent>()
 				.Has<PlayerNodeComponent>()
@@ -59,10 +62,13 @@ public partial class GodotEGPMainLoop : SceneTree
 				.Has<PlayerNodeComponent>()
 				.Build()
 			);
-		_ecs.RegisterSystem<CollisionSystem, PreUpdatePhase>(_ecs.CreateQuery()
+
+		_ecs.RegisterSystem<PlayerStateSystem, PostUpdatePhase>(_ecs.CreateQuery()
+				.Has<PlayerStateComponent>()
 				.Has<PlayerNodeComponent>()
 				.Build()
 			);
+
 		_ecs.RegisterSystem<GameSystem, FinalPhase>(_ecs.CreateQuery()
 				.Has<GameStateComponent>()
 				.Build()
