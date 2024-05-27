@@ -24,7 +24,6 @@ settings/stdout/print_fps=true
 
 window/stretch/mode="viewport"
 window/stretch/aspect="keep_width"
-window/vsync/vsync_mode=0
 
 [dotnet]
 
